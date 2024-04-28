@@ -1,0 +1,31 @@
+@page "/Parameters"
+@using Criptografia
+
+<h1>Parameters</h1>
+
+<div class="col-md-1">
+  <label for="exampleFormControlTextarea1" class="form-label">Key</label>
+  <input @bind="_key" type="number" class="form-control"/>
+</div>
+
+<button @onclick="Save" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#saveData" style="margin-top: 10px;">Save</button>
+<div class="modal fade" id="saveData" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        New key saved!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+@code
+{
+  private int _key = Criptografia.CifraDeCesar.Key;
+  public void Save()
+  {
+    Criptografia.CifraDeCesar.Key = _key;
+  }
+}

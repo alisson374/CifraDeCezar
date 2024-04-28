@@ -1,0 +1,39 @@
+﻿@page "/"
+@using Criptografia;
+
+<PageTitle>Cifra de Cezar</PageTitle>
+
+<h1>Home</h1>
+
+<div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">Decrypted text</label>
+  <textarea @bind="@_decrypted" class="form-control" id="exampleFormControlTextarea1" ></textarea>
+<button @onclick="Encrypt" type="button" class="btn btn-primary" style="margin-top: 10px;">Encrypt</button>
+</div>
+
+<div class="mb-3" style="margin-top: 20px;">
+  <label for="exampleFormControlTextarea1" class="form-label">Encripted text</label>
+  <textarea @bind="@_encrypted" class="form-control" id="exampleFormControlTextarea1"></textarea>
+<button @onclick="Decrypt" type="button" class="btn btn-primary" style="margin-top: 10px;">Decrypt</button>
+</div>
+
+<button @onclick="Clean" type="button" class="btn btn-primary" style="margin-top: 10px;">Clean</button>
+@code {
+  private string _decrypted = string.Empty;
+  private string _encrypted = string.Empty;
+  public void Encrypt()
+  {
+    _encrypted = Criptografia.CifraDeCesar.Criptografar(_decrypted);
+  }
+
+  public void Decrypt()
+  {
+    _decrypted = Criptografia.CifraDeCesar.Descriptografar(_encrypted);
+  }
+
+  public void Clean()
+  {
+    _decrypted = string.Empty;
+    _encrypted = string.Empty;
+  }
+}
