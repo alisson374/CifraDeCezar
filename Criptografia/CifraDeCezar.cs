@@ -13,18 +13,12 @@ public static class CifraDeCesar
     'E', 'F', 'G', 'H', 'I', 'J',
     'K', 'L', 'M', 'N', 'O', 'P',
     'Q', 'R', 'S', 'T', 'U', 'V',
-    'W', 'X', 'Y', 'Z'
+    'W', 'X', 'Y', 'Z', ' ', '1',
+    '2', '3', '4', '5', '6', '7',
+    '8', '9', '0', '*', '&', ',',
+    '.', '/', '?', '!', '~', '"',
+    '-', '>', '<', '{', '}','@'
   ];
-
-  // public static CifraDeCesar(int key, List<char> charsRange)
-  // {
-  //   Key = key;
-  //   CharsRange = charsRange;
-  // }
-  // public static CifraDeCesar(int key)
-  // {
-  //   Key = key;
-  // }
 
   public static string Criptografar(string text)
   {
@@ -33,9 +27,6 @@ public static class CifraDeCesar
 
     for (int i = 0; i < length; i++)
     {
-      if(chars[i] == ' ')
-        continue;
-
       int indexNewChar = CharsRange.FindIndex(x => x == chars[i]);
       indexNewChar = ParseIndexPositive(indexNewChar + Key);
       chars[i] = CharsRange[indexNewChar];
@@ -51,9 +42,6 @@ public static class CifraDeCesar
 
     for (int i = 0; i < length; i++)
     {
-      if(chars[i] == ' ')
-        continue;
-
       int indexNewChar = CharsRange.FindIndex(x => x == chars[i]);
       indexNewChar = ParseIndexNegative(indexNewChar - Key);
       chars[i] = CharsRange[indexNewChar];
