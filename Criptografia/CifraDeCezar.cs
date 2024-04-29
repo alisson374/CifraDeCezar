@@ -23,12 +23,12 @@ public static class CifraDeCesar
   public static string Criptografar(string text)
   {
     var chars = text.ToCharArray();
-    int length = chars.Count();
+    int length = chars.Length;
 
     for (int i = 0; i < length; i++)
     {
       int indexNewChar = CharsRange.FindIndex(x => x == chars[i]);
-      indexNewChar = ParseIndexPositive(indexNewChar + Key);
+      indexNewChar = ParseIndexPositive(indexNewChar);
       chars[i] = CharsRange[indexNewChar];
     }
 
@@ -38,34 +38,21 @@ public static class CifraDeCesar
   public static string Descriptografar(string text)
   {
     var chars = text.ToCharArray();
-    int length = chars.Count();
+    int length = chars.Length;
 
     for (int i = 0; i < length; i++)
     {
       int indexNewChar = CharsRange.FindIndex(x => x == chars[i]);
-      indexNewChar = ParseIndexNegative(indexNewChar - Key);
+      indexNewChar = ParseIndexNegative(indexNewChar);
       chars[i] = CharsRange[indexNewChar];
     }
 
     return new string(chars);
   }
 
-  private static int ParseIndexPositive(int index)
-  {
-    while(index >= CharsRange.Count)
-    {
-      index -= CharsRange.Count;
-    }
+  private static int ParseIndexPositive(int index) =>
+    (index + (Key % CharsRange.Count) + CharsRange.Count) % CharsRange.Count;
 
-    return index;
-  }
-  private static int ParseIndexNegative(int index)
-  {
-    while(index < 0)
-    {
-      index += CharsRange.Count;
-    }
-
-    return index;
-  }
+  private static int ParseIndexNegative(int index) =>
+    (index + (-Key % CharsRange.Count) + CharsRange.Count) % CharsRange.Count;
 }
